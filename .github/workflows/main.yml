@@ -1,8 +1,6 @@
 name: Run AI Script
 
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 jobs:
@@ -24,4 +22,4 @@ jobs:
           python -m patchright install chromium
 
       - name: Run v2.py
-        run: python v2.py
+        run: xvfb-run python v2.py
