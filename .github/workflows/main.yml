@@ -21,7 +21,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install patchright
-          python -m patchright install chromium
+          python -m patchright install chrome
 
       - name: Run v2.py
         run: xvfb-run python v2.py
