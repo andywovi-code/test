@@ -7,7 +7,7 @@ on:
 
 jobs:
   run-script:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
       - name: Checkout repository
@@ -21,10 +21,10 @@ jobs:
       - name: Install dependencies
         run: |
           pip install patchright
-          python -m patchright install chrome
+          patchright install chrome
 
       - name: Run v2.py
-        run: xvfb-run python v2.py
+        run: python v2.py
 
       - name: Upload screenshot on failure
         if: failure()
