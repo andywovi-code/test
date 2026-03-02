@@ -13,7 +13,7 @@ def run() -> None:
         )
 		page = browser.new_page()
 		try:
-			page.goto(TARGET_URL, wait_until="domcontentloaded", timeout=6000)
+			page.goto(TARGET_URL, wait_until="domcontentloaded", timeout=60000)
 
 			# Wait for the model button and get the AI model name
 			button_span = page.locator('#chat-area button span').nth(1)
@@ -28,17 +28,17 @@ def run() -> None:
 			print("Message sent. Waiting for response...")
 
 			# Wait for tooltip-trigger buttons to appear, then click the last one to copy
-			page.locator('button[data-slot="tooltip-trigger"]').last.wait_for(state="visible", timeout=6000)
+			page.locator('button[data-slot="tooltip-trigger"]').last.wait_for(state="visible", timeout=60000)
 			# page.locator('button[data-slot="tooltip-trigger"]').last.click()
 			
 			# print the text content of div.prose element
 			prose_div = page.locator('div.prose').first
-			prose_div.wait_for(state="visible", timeout=6000)
+			prose_div.wait_for(state="visible", timeout=5000)
 			prose_text = prose_div.inner_text()
 			print("Response from AI:")
 			print(prose_text)
 		except Exception as e:
-			page.screenshot(path="error_screenshot.png")
+			page.screenshot(path="error_screenshot.png", timeout=60000)
 			print(f"Error occurred, screenshot saved to error_screenshot.png: {e}")
 			raise
 		finally:
@@ -50,4 +50,3 @@ if __name__ == "__main__":
 		run()
 	except KeyboardInterrupt:
 		print("Stopped.")
-
