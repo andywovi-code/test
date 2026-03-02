@@ -1,6 +1,8 @@
 name: Run AI Script
 
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
 
 jobs:
@@ -23,3 +25,10 @@ jobs:
 
       - name: Run v2.py
         run: xvfb-run python v2.py
+
+      - name: Upload screenshot on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: error-screenshot
+          path: error_screenshot.png
